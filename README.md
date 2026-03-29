@@ -1,6 +1,6 @@
 # 🚀 PIC16F84A Mastery: Arquitectura y Migración Profesional
 
-![PIC16F84A Mastery: Del ASM Clásico al Estándar Industrial Moderno (con MPASM)](assets/cover_banner_mpasm.png)
+![PIC16F84A Mastery: Del ASM Clásico al Estándar Industrial Moderno (con MPASM)](assets/portada.png)
 
 Este repositorio documenta mi especialización en sistemas embebidos de 8 bits, centrando el estudio en el **Microchip PIC16F84A**. El proyecto evoluciona desde el aprendizaje académico con el estándar legacy **MPASM** (siguiendo la bibliografía de *Palacios, Remiro, López y Castro*) hacia la implementación profesional en **PIC-AS (XC8)**.
 
@@ -31,9 +31,10 @@ El desarrollo se organiza bajo una estructura jerárquica para asegurar la escal
 graph TD
     A[Capa 3: Aplicación - Lógica de Usuario] --> B[Capa 2: Abstracción - Drivers y Subrutinas]
     B --> C[Capa 1: Hardware - Registros y Puertos]
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style B fill:#bbf,stroke:#333,stroke-width:2px
-    style C fill:#bfb,stroke:#333,stroke-width:2px
+    
+    style A fill:#212121,stroke:#00e5ff,stroke-width:2px,color:#fff
+    style B fill:#212121,stroke:#76ff03,stroke-width:2px,color:#fff
+    style C fill:#212121,stroke:#ffea00,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -77,7 +78,7 @@ La elección del **PIC16F84A** como eje central de este repositorio no es casual
 > [!WARNING]
 > **Aviso Legal:** El código fuente y los ejemplos contenidos en este repositorio están inspirados o basados en la bibliografía citada y en las hojas de datos oficiales de Microchip Technology Inc. Se publican exclusivamente con fines educativos y de investigación personal. Todos los derechos sobre las obras originales pertenecen a sus respectivos autores.
 
-### Bibliografía Principal (Estilo APA 7ma Ed.)
+### Bibliografía Principal
 * Palacios, E., Remiro, F., López, J. M., & Castro, J. M. (2006). *Microcontrolador PIC16F84: Desarrollo de proyectos* (3ra ed.). Editorial Alfaomega. **ISBN-13: 978-8426713919**.
   *(El desarrollo metodológico de MPASM en este repositorio sigue la línea pedagógica de esta obra).*
 
