@@ -1,6 +1,6 @@
 # 🚀 PIC16F84A Mastery: Arquitectura y Migración Profesional
 
-![PIC16F84A Mastery: Del ASM Clásico al Estándar Industrial Moderno (con MPASM)](assets/portada.png)
+![PIC16F84A Mastery: Del ASM Clásico al Estándar Industrial Moderno (con MPASM)](./assets/portada.png)
 
 Este repositorio documenta mi especialización en sistemas embebidos de 8 bits, centrando el estudio en el **Microchip PIC16F84A**. El proyecto evoluciona desde el aprendizaje académico con el estándar legacy **MPASM** (siguiendo la bibliografía de *Palacios, Remiro, López y Castro*) hacia la implementación profesional en **PIC-AS (XC8)**.
 
