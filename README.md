@@ -1,6 +1,17 @@
-# 🚀 PIC16F84A Mastery: Arquitectura y Migración Profesional
+<div align="center">
+  <img src="assets/portada.png" alt="PIC16F84A Mastery Logo" width="600">
+  
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](https://opensource.org/licenses/MIT)
+  [![MCU](https://img.shields.io/badge/MCU-PIC16F84A-blue?style=for-the-badge&logo=microchip)](https://www.microchip.com/en-us/product/PIC16F84A)
+  [![Toolchain](https://img.shields.io/badge/Toolchain-MPASM_|_PIC--AS-orange?style=for-the-badge)](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers)
+  [![Architecture](https://img.shields.io/badge/Architecture-Bare_Metal_|_3--Layers-green?style=for-the-badge)](https://en.wikipedia.org/wiki/Bare_machine)
 
-![PIC16F84A Mastery: Del ASM Clásico al Estándar Industrial Moderno (con MPASM)](./assets/portada.png)
+  # PIC16F84A-Mastery
+
+  *"Explorando el silicio desde sus cimientos: Un recorrido metodológico por la arquitectura de 8 bits, desde el ASM clásico hasta el estándar industrial moderno."*
+</div>
+
+---
 
 Este repositorio documenta mi especialización en sistemas embebidos de 8 bits, centrando el estudio en el **Microchip PIC16F84A**. El proyecto evoluciona desde el aprendizaje académico con el estándar legacy **MPASM** (siguiendo la bibliografía de *Palacios, Remiro, López y Castro*) hacia la implementación profesional en **PIC-AS (XC8)**.
 
