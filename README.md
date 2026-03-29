@@ -4,7 +4,7 @@
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](https://opensource.org/licenses/MIT)
   [![MCU](https://img.shields.io/badge/MCU-PIC16F84A-blue?style=for-the-badge&logo=microchip)](https://www.microchip.com/en-us/product/PIC16F84A)
   [![Toolchain](https://img.shields.io/badge/Toolchain-MPASM_|_PIC--AS-orange?style=for-the-badge)](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers)
-  [![Architecture](https://img.shields.io/badge/Architecture-Bare_Metal_|_3--Layers-green?style=for-the-badge)](https://en.wikipedia.org/wiki/Bare_machine)
+ [![Methodology](https://img.shields.io/badge/Methodology-Palacios_|_López-red?style=for-the-badge)](https://github.com/CarlitozMF/PIC16F84A-Mastery/tree/main/01_ASM_MPASM)
 
   # PIC16F84A-Mastery
 
