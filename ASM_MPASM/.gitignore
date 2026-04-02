@@ -1,0 +1,28 @@
+# =================================================================
+# 📑 GITIGNORE ESPECÍFICO: Carpeta 01_ASM_MPASM
+# =================================================================
+
+# --- 1. Archivos de Reporte Temporales ---
+# Estos ensucian el repo en cada compilación local.
+*.err           # Reporte de errores (Solo útil si falla el build)
+*.lst           # Listado de ensamblado (Muy pesado para Git)
+*.cod           # Archivo de símbolos para Proteus/Simuladores
+
+# --- 2. Archivos de Depuración (Debug) ---
+*.cof           # Common Object File
+*.sym           # Tabla de símbolos interna
+*.obj           # Objeto reubicable
+
+# --- 3. Archivos de Proyecto de MPLAB (Si no usas VS Code) ---
+*.mcs
+*.mcw
+*.mcp
+*.pjt
+
+# --- 4. EXCEPCIONES (Lo que SÍ queremos subir) ---
+# Forzamos que estos archivos siempre se incluyan aunque 
+# haya reglas generales en la raíz que los ignoren.
+!*.asm          # El código fuente es sagrado
+!*.inc          # Archivos de cabecera personalizados
+!*.hex          # El binario final para que otros lo prueben
+!README.md      # La documentación de cada lab

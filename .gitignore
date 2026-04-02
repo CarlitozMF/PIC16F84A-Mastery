@@ -1,40 +1,49 @@
 # =================================================================
-# GITIGNORE PARA PROYECTOS PIC16F84A (MPASM / MPLAB X)
+# 📑 GITIGNORE PROFESIONAL: PIC16F84A Mastery
 # =================================================================
 
-# --- Archivos de Salida del Compilador (Basura de Compilación) ---
-*.err
-*.lst
-*.obj
-*.cof
-*.map
-*.mcs
-*.p1
-*.pre
-*.sym
-*.o
+# --- 1. Archivos de Salida del Compilador (Temporales) ---
+# Estos archivos se generan en cada compilación y no deben subirse.
+*.err           # Reporte de errores de MPASM
+*.lst           # Listado de memoria y ensamblado
+*.obj           # Objeto reubicable
+*.cof           # Common Object File (para debug)
+*.map           # Mapa de memoria
+*.mcs           # Archivos de control de proyectos antiguos
+*.p1            # Archivos temporales de XC8/PIC-AS
+*.pre           # Archivos preprocesados
+*.sym           # Tabla de símbolos
+*.o             # Archivos objeto modernos
+*.d             # Archivos de dependencias
 
-# --- Directorios de Construcción de MPLAB X ---
+# --- 2. Directorios de Construcción de MPLAB X ---
+# Estas carpetas son recreadas por el IDE en cada "Build".
 build/
 dist/
-nbproject/private/
+nbproject/private/    # CRÍTICO: Contiene rutas locales de tu PC
 nbproject/Makefile-*
 nbproject/Package-*
 
-# --- Archivos de Usuario y Temporales del IDE ---
+# --- 3. Basura de VS Code (Si lo usas como editor) ---
+.vscode/
+*.code-workspace
+
+# --- 4. Archivos de Usuario y Logs del IDE ---
 *.user
 *.bkx
 *.pjt
 *.mcp
-*.mcs
 disassembly.lst
 temp.txt
+*.log
 
-# --- Binarios Finales (OPCIONAL) ---
-# Si queres que los .hex se suban para que otros los prueben, 
-# comenta la linea de abajo con un #
-# *.hex
-
-# --- Archivos de Sistema ---
+# --- 5. Archivos de Sistema Operativo ---
 .DS_Store
 Thumbs.db
+Desktop.ini
+
+# --- 6. Binarios Finales (.HEX) ---
+# Regla de Ingeniería: Generalmente NO se suben binarios al repo.
+# Si querés que los usuarios puedan descargar el .hex directamente, 
+# comentá la línea de abajo con un #.
+*.hex
