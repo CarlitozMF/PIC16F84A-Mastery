@@ -13,11 +13,12 @@
 *.sym           # Tabla de símbolos interna
 *.obj           # Objeto reubicable
 
-# --- 3. Archivos de Proyecto de MPLAB (Si no usas VS Code) ---
+# --- 3. Archivos de Proyecto de MPLAB ---
 *.mcs
 *.mcw
 *.mcp
 *.pjt
+*Makefile
 
 # --- 4. EXCEPCIONES (Lo que SÍ queremos subir) ---
 # Forzamos que estos archivos siempre se incluyan aunque 
