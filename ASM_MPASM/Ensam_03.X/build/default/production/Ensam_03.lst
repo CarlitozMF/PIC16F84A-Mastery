@@ -1,19 +1,17 @@
-MPASM 5.68                          MAIN.ASM   4-1-2026  22:50:04         PAGE  1
+MPASM 5.68                      ENSAM_03.ASM   4-1-2026  22:52:26         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
                       00001 ;*************************************************************************************************
-                      00002 ; PROYECTO: Elemental_10 - Modo Standby
+                      00002 ; PROYECTO: Ensam_03 - Configuracion de Entradas y Salidas
                       00003 ; AUTOR: Carlos Mamani Flores (UTN-FRT)
-                      00004 ; DESCRIPCIÓN: Lee RA<4:0>y se muestra el resultado en RB<7:0> Esta operación la realizará una
-                      00005 ;única vez, después el programa entrará en modo Standby o de bajo consumo del cual no
-                      00006 ;podrá salir.
-                      00007 ;*************************************************************************************************
-                      00008 
-                      00009     LIST      P=16F84A
-                      00010     INCLUDE   <P16F84A.INC>
+                      00004 ; DESCRIPCIÓN: Lee RA<4:0>y se muestra el resultado en RB<7:0>
+                      00005 ;*************************************************************************************************
+                      00006 
+                      00007         LIST        P=16F84A
+                      00008         INCLUDE     <P16F84A.INC>
                       00001         LIST
                       00002 
                       00003 ;==========================================================================
@@ -24,48 +22,33 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00008 ;==========================================================================
                       00009 
                       00209         LIST
-                      00011 
-2007   3FF9           00012     __CONFIG _FOSC_XT & _WDTE_OFF & _PWRTE_OFF & _CP_OFF
-                      00013 
-                      00014 ;--- CAPA 1: MAPEO DE HARDWARE Y CONSTANTES ---
-Warning[207]: Found label after column 1. (ENTRADAS)
-  0000001F            00015     ENTRADAS    EQU     b'00011111'     ; RA0-RA4 como entradas
-Warning[207]: Found label after column 1. (MASCARASW)
-  0000001F            00016     MASCARASW   EQU     b'00011111'     ; Mascara para asegurar el uso de los 5 bits de entrada
+                      00009         
+2007   3FF9           00010         __CONFIG _FOSC_XT & _WDTE_OFF & _PWRTE_OFF & _CP_OFF
+                      00011         
+                      00012 ;--- CAPA 1: MAPEO DE HARDWARE Y CONSTANTES ---
+  0000001F            00013 ENTRADAS   EQU      b'00011111'     ;El nibble alto esta en 1 y el bajo en 0
+                      00014 
+                      00015         ORG         0               ;El programa comienza en la posicion 0 de la memoria de programa
+0000   2???           00016         GOTO        INICIO          ;Salta la posicion de memoria del vector de interrupcion
                       00017 
-                      00018     ORG     0x00
-0000   2???           00019     GOTO    INICIO
-                      00020 
-                      00021     ORG     0x04
-0004   0009           00022     RETFIE                          ; Resguardo de interrupciones
-                      00023 ;--- CAPA 2: CONFIGURACIÓN DE PERIFÉRICOS ---
-0005                  00024 INICIO
-0005   1683           00025     BSF     STATUS, RP0             ; Acceso al Banco 1
-0006   301F           00026     MOVLW   ENTRADAS
+                      00018         ORG         04h             ;Direccion de memoria del vector de interrupcion
+0004   0009           00019         retfie                      ;Retorno de seguridad
+                      00020 ;--- CAPA 2: CONFIGURACIÓN DE PERIFÉRICOS ---
+0005   1683           00021 INICIO  bsf         STATUS,RP0      ;Con el bit RP0 en 1, accedo al banco 1
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0007   0085           00027     MOVWF   TRISA                   ; Configuro Puerto A
+0006   0186           00022         clrf        TRISB           ;El puerto B se configura como salida
+0007   301F           00023         movlw       ENTRADAS        ;Cargo la constante que define a los pines como entrada
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0008   0186           00028     CLRF    TRISB                   ; Puerto B como salida completa
-0009   1283           00029     BCF     STATUS, RP0             ; Regreso al Banco 0
-                      00030     
-000A   0186           00031     CLRF    PORTB                   ; Aseguro salidas en 0 al iniciar
-                      00032 
-                      00033 ;--- CAPA 3: LÓGICA DE APLICACIÓN ---
-000B                  00034 MAIN
-000B   0805           00035     MOVF    PORTA,W                 ;Guardo en W los datos de entrada de PORTA
-000C   391F           00036     ANDLW   MASCARASW               ;Mascara de filtro para los 5 bits de entrada
-000D   0086           00037     MOVWF   PORTB                   ;Vuelco los valores de W con mascara en el PORTB
-000E   0063           00038     SLEEP                           ;Entra en modo stanby eterno
-000F                  00039 SEGURO
-MPASM 5.68                          MAIN.ASM   4-1-2026  22:50:04         PAGE  2
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-000F   2???           00040     goto SEGURO                     ;Bucle infinito que no ejecuta basura
-3FF9                  00041     END
-MPASM 5.68                          MAIN.ASM   4-1-2026  22:50:04         PAGE  3
+0008   0085           00024         movwf       TRISA           ;Determino que los bits RA<4:0> son entradas
+0009   1283           00025         bcf         STATUS,RP0      ;Con el bit RP0 en C, retorno al banco 0
+                      00026 ;--- CAPA 3: LÓGICA DE APLICACIÓN ---
+000A                  00027 MAIN    
+000A   0805           00028         movf        PORTA,W         ;Todo lo que leo en el Puerto A lo muevo al registro de trabajo W
+000B   0086           00029         movwf       PORTB           ;Lo cargado en el registro W lo vuelvo en el Puerto B
+000C   2???           00030         goto        MAIN            ;Se crea un blucle cerrado e infinito
+                      00031         
+3FF9                  00032         END                         ;Fin del Programa
+MPASM 5.68                      ENSAM_03.ASM   4-1-2026  22:52:26         PAGE  2
 
 
 SYMBOL TABLE
@@ -90,8 +73,7 @@ INTE                              00000004
 INTEDG                            00000006
 INTF                              00000001
 IRP                               00000007
-MAIN                              0000000B
-MASCARASW                         0000001F
+MAIN                              0000000A
 NOT_PD                            00000003
 NOT_RBPU                          00000007
 NOT_TO                            00000004
@@ -122,16 +104,15 @@ RBIF                              00000000
 RD                                00000000
 RP0                               00000005
 RP1                               00000006
-SEGURO                            0000000F
 STATUS                            00000003
-MPASM 5.68                          MAIN.ASM   4-1-2026  22:50:04         PAGE  4
+T0CS                              00000005
+T0IE                              00000005
+MPASM 5.68                      ENSAM_03.ASM   4-1-2026  22:52:26         PAGE  3
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-T0CS                              00000005
-T0IE                              00000005
 T0IF                              00000002
 T0SE                              00000004
 TMR0                              00000001
@@ -181,14 +162,8 @@ _WDT_ON                           00003FFF
 _XT_OSC                           00003FFD
 __16F84A                          00000001
 
-MPASM 5.68                          MAIN.ASM   4-1-2026  22:50:04         PAGE  5
-
-
-
-
-
 Errors   :     0
-Warnings :     2 reported,     0 suppressed
+Warnings :     0 reported,     0 suppressed
 Messages :     2 reported,     0 suppressed
 
 
