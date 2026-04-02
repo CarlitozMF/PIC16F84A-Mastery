@@ -51,11 +51,10 @@ INICIO
     
     CLRF    PORTB           ; ROBUSTEZ: Asegura salidas en 0V al iniciar el programa
 ```
-🔹 Detalle Capa 3: Lógica de Aplicación
-
+#### 🔹 Detalle Capa 3: Lógica de Aplicación
 Integración de funciones aritméticas utilizando el acumulador W como registro de procesamiento central.
-Fragmento de código
 
+```asm
 ;--- CAPA 3: LÓGICA DE APLICACIÓN ---
 MAIN
     MOVF    PORTA, W        ; Captura en tiempo real el valor de los interruptores
