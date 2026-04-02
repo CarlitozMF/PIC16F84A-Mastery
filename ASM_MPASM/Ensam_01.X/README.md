@@ -24,11 +24,13 @@ El desarrollo se organiza bajo una estructura jerárquica para asegurar la escal
 
 ```mermaid
 graph TD
-    A[Capa 3: Aplicación - Bucle Principal] --> B[Capa 2: Abstracción - Configuración de Bancos]
-    B --> C[Capa 1: Hardware - Directivas y Constantes]
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style B fill:#bbf,stroke:#333,stroke-width:2px
-    style C fill:#bfb,stroke:#333,stroke-width:2px
+    A[Capa 3: Aplicación - Lógica de Usuario] --> B[Capa 2: Abstracción - Drivers y Periféricos]
+    B --> C[Capa 1: Hardware - Registros y Silicio]
+    
+    %% Estilos en Escala de Grises (Dark Professional)
+    style A fill:#212121,stroke:#ffffff,stroke-width:2px,color:#ffffff
+    style B fill:#424242,stroke:#ffffff,stroke-width:2px,color:#ffffff
+    style C fill:#616161,stroke:#ffffff,stroke-width:2px,color:#ffffff
 ```
 
 #### 🔹 Detalle Capa 1: Hardware y Directivas
