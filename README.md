@@ -28,9 +28,9 @@ Este repositorio documenta mi especialización en sistemas embebidos de 8 bits, 
 
 | Directorio | Contenido | Estado |
 | :--- | :--- | :--- |
-| **[01_ASM_MPASM](./01_ASM_MPASM/)** | Laboratorios y ejercicios del libro de Palacios. | 🛠️ En Progreso |
-| **[02_ASM_PICAS](./02_ASM_PICAS/)** | Refactorización a estándar moderno XC8. | ⏳ Pendiente |
-| **[docs](./docs)** | Datasheets y notas técnicas de consulta. | ✅ Disponible |
+| **[01_ASM_MPASM](./ASM_MPASM/)** | Laboratorios y ejercicios del libro de Palacios. | 🛠️ En Progreso |
+| **[02_ASM_PICAS](./ASM_PICAS/)** | Refactorización a estándar moderno XC8. | ⏳ Pendiente |
+| **[docs](./Docs/)** | Datasheets y notas técnicas de consulta. | ✅ Disponible |
 
 ---
 
@@ -47,12 +47,6 @@ graph TD
     style B fill:#212121,stroke:#76ff03,stroke-width:2px,color:#fff
     style C fill:#212121,stroke:#ffea00,stroke-width:2px,color:#fff
 ```
-
----
-
-## 🏗️ Arquitectura del Software (Modelo de 3 Capas)
-
-El desarrollo se organiza bajo una estructura jerárquica para asegurar la escalabilidad y facilitar el mantenimiento del código:
 
 * **Capa 1 (Hardware):** Manipulación directa de registros `STATUS`, `PORT`, `TRIS` y configuración de *fuses* (`__CONFIG`). Es la base que interactúa directamente con el silicio.
 * **Capa 2 (Abstracción):** Implementación de subrutinas de retardo (*Delays*), manejo de tablas de verdad mediante `RETLW` y desarrollo de drivers propios para periféricos.
