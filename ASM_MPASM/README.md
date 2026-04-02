@@ -36,15 +36,16 @@ Cada laboratorio se organiza de forma modular para facilitar la lectura del cód
 
 ### 🟩 Fase 2: Lógica y Aritmética Elemental (Cap. 8)
 *Objetivo: Entrenamiento intensivo en la Unidad Aritmético Lógica (ALU).*
-- [x] **Elemental 01:** Suma de `PORTA` + 74d (Instrucción `ADDLW`).
-- [x] **Elemental 02:** Multiplicación por 2 mediante suma propia (`ADDWF`).
-- [x] **Elemental 03:** Máscaras lógicas **OR** (Fijar bits pares a "1" - `IORLW`).
-- [x] **Elemental 04:** Máscaras lógicas **AND** (Fijar bits impares a "0" - `ANDLW`).
-- [x] **Elemental 05:** Inversión de datos (Instrucción `COMF`).
-- [x] **Elemental 06:** Intercambio de *nibbles* (Instrucción `SWAPF`).
-- [x] **Elemental 07/08:** Desplazamientos laterales (`RLF` y `RRF`).
-- [x] **Elemental 09:** Inversión selectiva mediante **XOR** (`XORLW`).
-- [x] **Elemental 10:** Modo bajo consumo (`SLEEP`).
+- [x] **[Lab 04 (Elemental_01)](./Elemental_01.X/):** Suma de `PORTA` + 74d (Instrucción `ADDLW`).
+- [x] **[Lab 05 (Elemental_02)](./Elemental_02.X/):** Multiplicación por 2 mediante suma propia (`ADDWF`).
+- [x] **[Lab 06 (Elemental_03)](./Elemental_03.X/):** Máscaras lógicas **OR** (Fijar bits pares a "1" - `IORLW`).
+- [x] **[Lab 07 (Elemental_04)](./Elemental_04.X/):** Máscaras lógicas **AND** (Fijar bits impares a "0" - `ANDLW`).
+- [x] **[Lab 08 (Elemental_05)](./Elemental_05.X/):** Inversión de datos (Instrucción `COMF`).
+- [x] **[Lab 09 (Elemental_06)](./Elemental_06.X/):** Intercambio de *nibbles* (Instrucción `SWAPF`).
+- [x] **[Lab 10 (Elemental_07)](./Elemental_07.X/):** Desplazamiento lateral (`RLF`).
+- [x] **[Lab 11 (Elemental_08)](./Elemental_08.X/):** Desplazamiento lateral (`RRF`).
+- [x] **[Lab 12 (Elemental_09)](./Elemental_09.X/):** Inversión selectiva mediante **XOR** (`XORLW`).
+- [x] **[Lab 13 (Elemental_10)](./Elemental_10.X/):** Modo bajo consumo (`SLEEP`).
 
 ### 🟨 Fase 3: Control de Flujo y Subrutinas (Cap. 9 y 10)
 *Objetivo: Abstracción de funciones y gestión de tiempos.*
