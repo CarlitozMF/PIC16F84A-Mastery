@@ -1,5 +1,5 @@
 ;**************************************************************************************
-; PROYECTO: Elemental_03 - introduccion a las mascaras de bits
+; PROYECTO: Elemental_04 - introduccion a las mascaras de bits
 ; AUTOR: Carlos Mamani Flores (UTN-FRT)
 ; DESCRIPCIÓN: Lee RA<4:0> y se muestra el resultado en RB<7:0> pero los bits impares
 ; siempre deben estar en 0
