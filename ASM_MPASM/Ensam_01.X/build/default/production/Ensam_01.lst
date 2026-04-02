@@ -1,20 +1,16 @@
-MPASM 5.68                      ENSAM_01.ASM   3-29-2026  0:09:31         PAGE  1
+MPASM 5.68                      ENSAM_01.ASM   4-1-2026  22:25:00         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00001 ;**********************Ensam_01.ASM**********************
-                      00002 ;Por los diodos LED conectados al puerto B se visualiza   
-                      00003 ;el valor de una constante, por ejemplo el numero
-                      00004 ;binario b'01010101'.-
-                      00005 ;ZONA DE DATOS*******************************************
-                      00006     
-                      00007 ; CONFIG
-2007   3FF1           00008         __CONFIG _FOSC_XT & _WDTE_OFF & _PWRTE_ON & _CP_OFF
-                      00009  
-                      00010         LIST        P=16F84A            ;Procesador utilizado
-                      00011         INCLUDE    <P16F84A.INC>        ;Etiquetes del PIC16f84A
+                      00001 ;*************************************************************************************************
+                      00002 ; PROYECTO: Ensam_01 - Configuracion de Salida
+                      00003 ; AUTOR: Carlos Mamani Flores (UTN-FRT)
+                      00004 ; DESCRIPCIÓN: Se muestra el valor de una constante en RB<7:0>
+                      00005 ;*************************************************************************************************
+                      00006         LIST        P=16F84A            ;Procesador utilizado
+                      00007         INCLUDE    <P16F84A.INC>        ;Etiquetes del PIC16f84A
                       00001         LIST
                       00002 
                       00003 ;==========================================================================
@@ -25,36 +21,39 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00008 ;==========================================================================
                       00009 
                       00209         LIST
-  000000FF            00012 CONSTANTE   EQU     b'11111111'
-                      00013 
-                      00014 ;ZONA DE CODIGOS*****************************************
-                      00015 ;   ----    Vector de Reset ----
-                      00016         ORG         0                   ;El ptograma comienza en la direccion 0 de la memoria de program
+                      00008         
+2007   3FF1           00009         __CONFIG _FOSC_XT & _WDTE_OFF & _PWRTE_ON & _CP_OFF
+                      00010 
+                      00011 ;--- CAPA 1: MAPEO DE HARDWARE Y CONSTANTES ---
+  00000055            00012 CONSTANTE   EQU     b'01010101'
+                      00013 ;   ----    Vector de Reset ----
+                      00014         ORG         0                   ;El ptograma comienza en la direccion 0 de la memoria de program
                             a
-0000   2???           00017         goto        Inicio              ;Salta la posicion de memoria del vector de interrupcion
-                      00018 ;   ----    Vector de Intrrupcion   ----
-                      00019         ORG         04h                 ;Direcciion de memoria del vector interrupcio
-0004   0009           00020         retfie                          ;Retorna por seguridad
-                      00021 ;   ----    Programa Principal  ----
-0005   1683           00022 Inicio  bsf         STATUS,RP0          ;Pone en 1 el bit 5 (RP0) de STATUS. Accede al banco 1
+0000   2???           00015         goto        Inicio              ;Salta la posicion de memoria del vector de interrupcion
+                      00016 ;   ----    Vector de Intrrupcion   ----
+                      00017         ORG         04h                 ;Direcciion de memoria del vector interrupcio
+0004   0009           00018         retfie                          ;Retorna por seguridad
+                      00019 ;--- CAPA 2: CONFIGURACIÓN DE PERIFÉRICOS ---
+0005   1683           00020 Inicio  bsf         STATUS,RP0          ;Pone en 1 el bit 5 (RP0) de STATUS. Accede al banco 1
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0006   0186           00023         clrf        TRISB               ;Las lineas del puerto B se configuran como salida
-0007   1283           00024         bcf         STATUS,RP0          ;Pone en 0 el bit 5 (RP0) de STATUS, Retorna al banco 0
-                      00025         
-0008   30FF           00026         movlw       CONSTANTE           ;Carga el registro de trabajo w con el valor de la cte
-0009                  00027 Principal
-0009   0086           00028         movwf       PORTB               ;El contenido de W se deposita en el puerto de salida
-000A   2???           00029         goto        Principal           ;Se crea un blucle cerrado e infinito
-                      00030         
-3FF1                  00031         END                             ;Fin del Programa
-MPASM 5.68                      ENSAM_01.ASM   3-29-2026  0:09:31         PAGE  2
+0006   0186           00021         clrf        TRISB               ;Las lineas del puerto B se configuran como salida
+0007   1283           00022         bcf         STATUS,RP0          ;Pone en 0 el bit 5 (RP0) de STATUS, Retorna al banco 0
+                      00023         
+0008   3055           00024         movlw       CONSTANTE           ;Carga el registro de trabajo w con el valor de la cte
+                      00025 ;--- CAPA 3: LÓGICA DE APLICACIÓN ---
+0009                  00026 Principal
+0009   0086           00027         movwf       PORTB               ;El contenido de W se deposita en el puerto de salida
+000A   2???           00028         goto        Principal           ;Se crea un blucle cerrado e infinito
+                      00029         
+3FF1                  00030         END                             ;Fin del Programa
+MPASM 5.68                      ENSAM_01.ASM   4-1-2026  22:25:00         PAGE  2
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
 C                                 00000000
-CONSTANTE                         000000FF
+CONSTANTE                         00000055
 DC                                00000001
 EEADR                             00000009
 EECON1                            00000088
@@ -106,7 +105,7 @@ RP1                               00000006
 STATUS                            00000003
 T0CS                              00000005
 T0IE                              00000005
-MPASM 5.68                      ENSAM_01.ASM   3-29-2026  0:09:31         PAGE  3
+MPASM 5.68                      ENSAM_01.ASM   4-1-2026  22:25:00         PAGE  3
 
 
 SYMBOL TABLE

@@ -1,8 +1,6 @@
 ;********************************************Ensam_02.ASM********************************************
 ;Por el Puerto B se obtiene el dato de las cinco líneas del Puerto A,al que está conectado un array 
-;de interruptores. Por ejemplo, si por el Puerto A se introduce ?---11001?, por el Puerto B 
-;aparecerá ?xxx11001? (no importa el valor de los tres bits más altos del Puerto B)
-;
+;de interruptores.
 ;ZONA DE DATOS***************************************************************************************
 ; CONFIG
 	__CONFIG _FOSC_XT & _WDTE_OFF & _PWRTE_OFF & _CP_OFF
