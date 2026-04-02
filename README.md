@@ -28,8 +28,8 @@ Este repositorio documenta mi especialización en sistemas embebidos de 8 bits, 
 
 | Directorio | Contenido | Estado |
 | :--- | :--- | :--- |
-| **[01_ASM_MPASM](./ASM_MPASM/)** | Laboratorios y ejercicios del libro de Palacios. | 🛠️ En Progreso |
-| **[02_ASM_PICAS](./ASM_PICAS/)** | Refactorización a estándar moderno XC8. | ⏳ Pendiente |
+| **[ASM_MPASM](./ASM_MPASM/)** | Laboratorios y ejercicios del libro de Palacios. | 🛠️ En Progreso |
+| **[ASM_PICAS](./ASM_PICAS/)** | Refactorización a estándar moderno XC8. | ⏳ Pendiente |
 | **[docs](./Docs/)** | Datasheets y notas técnicas de consulta. | ✅ Disponible |
 
 ---
