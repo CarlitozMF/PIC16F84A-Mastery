@@ -8,13 +8,28 @@
 ---
 
 ## 📖 Teoría de Operación
-En la arquitectura Harvard del **PIC16F84A**, los registros se organizan en bancos. Para configurar la dirección de un puerto (Entrada o Salida), se debe acceder al registro `TRIS` ubicado en el Banco 1. Una vez configurado, se debe retornar al Banco 0 para manipular los niveles lógicos del registro `PORT`.
+En la arquitectura Harvard del **PIC16F84A**, la memoria de datos se organiza en **Bancos** para optimizar el direccionamiento de 7 bits. Para configurar la dirección de un puerto (Entrada o Salida), se debe acceder al registro `TRIS` ubicado en el **Banco 1**, mientras que para manipular los niveles lógicos se utiliza el registro `PORT` en el **Banco 0**.
 
-Este ejercicio demuestra el ciclo fundamental:
-1. **Acceso:** Selección de Banco 1.
-2. **Direccionamiento:** Configuración de `TRISB`.
-3. **Retorno:** Selección de Banco 0.
-4. **Ejecución:** Escritura de constante en `PORTB`.
+---
+
+### 📝 Fundamentos del Registro STATUS (Bit RP0)
+El bit `RP0` (*Register Bank Select*) del registro `STATUS` (ubicado en la dirección `03h`) actúa como el conmutador maestro de la memoria:
+* **`STATUS, RP0 = 1`**: El microcontrolador apunta al **Banco 1** (Configuración de periféricos: `TRISA`, `TRISB`, `OPTION_REG`).
+* **`STATUS, RP0 = 0`**: El microcontrolador apunta al **Banco 0** (Operación de datos: `PORTA`, `PORTB`, RAM GPR).
+
+#### **Lógica de Configuración de Puertos**
+El ejercicio implementa el ciclo crítico de inicialización de hardware:
+1. **Acceso (BSF):** Se pone a '1' el bit `RP0` para saltar al Banco 1.
+2. **Direccionamiento:** Se carga un valor en `W` y se vuelca en `TRISB` (0 = Salida, 1 = Entrada).
+3. **Retorno (BCF):** Se pone a '0' el bit `RP0` para volver al Banco 0 y permitir el flujo de datos.
+4. **Ejecución:** Se escribe la constante deseada en el registro `PORTB` para activar los pines físicos.
+
+**Ejemplo Práctico en el Proyecto:**
+Para encender un LED en el pin RB0:
+* **En Banco 1:** Se limpia `TRISB` (`CLRF TRISB`) para que todo el puerto sea salida.
+* **En Banco 0:** Se carga `b'00000001'` en el acumulador y se mueve a `PORTB`.
+
+> **Nota de Robustez:** Olvidar el retorno al Banco 0 (`BCF STATUS, RP0`) es uno de los errores más comunes en ASM, ya que el programa intentará escribir datos de usuario en registros de configuración, provocando un comportamiento errático del hardware.
 
 ---
 

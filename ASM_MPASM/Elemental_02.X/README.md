@@ -8,9 +8,31 @@
 ---
 
 ## 📖 Teoría de Operación
-En la programación de bajo nivel, la multiplicación por potencias de 2 puede realizarse de forma ultra eficiente mediante sumas sucesivas o desplazamientos de bits (*bit-shifting*). 
+En la programación de bajo nivel, las operaciones aritméticas simples como la multiplicación por potencias de 2 ($2^n$) pueden realizarse de forma ultra eficiente sin necesidad de algoritmos complejos, utilizando el propio acumulador como sumador simétrico.
 
-Este proyecto lee un valor binario variable desde el Puerto A (RA0-RA4), lo almacena en el registro de trabajo **W** y luego le suma el valor original del puerto nuevamente. El resultado físico es un "Amplificador Digital" donde la salida en el Puerto B es exactamente el doble de la entrada.
+---
+
+### 📝 Fundamentos de la Instrucción ADDWF
+La instrucción `ADDWF f, d` (*Add W to f*) suma el contenido del acumulador **W** con el contenido de un registro de dirección **f**. El destino del resultado depende del bit **d**:
+* Si `d = 0` (W), el resultado se guarda en el acumulador.
+* Si `d = 1` (F), el resultado se guarda en el registro original.
+
+#### **Lógica de Duplicación (Multiplicación x2)**
+La operación implementada en este proyecto sigue la lógica de suma sucesiva:
+$$Resultado = Entrada + Entrada = 2 \times Entrada$$
+
+#### **Equivalencia con Bit-Shifting**
+En términos de bits, sumar un número por sí mismo es equivalente a realizar un **desplazamiento lógico a la izquierda (LSL)**. 
+* **Entrada (5):** `b'00000101'`
+* **Suma (5+5):** `b'00001010'` (Resultado: 10)
+* *Observación: Todos los bits se desplazaron una posición a la izquierda.*
+
+**Ejemplo Práctico en el Proyecto:**
+1. **Captura:** Se lee el `PORTA` y se carga el valor en **W**.
+2. **Procesamiento:** Se ejecuta `ADDWF PORTA, W`. La ALU toma el valor de los pines físicos y le suma el valor que ya tenía en el acumulador.
+3. **Salida:** El `PORTB` refleja el doble de la entrada original.
+
+> **Nota Técnica:** Este método de "Amplificador Digital" es significativamente más rápido que llamar a una subrutina de multiplicación, aprovechando el determinismo de la arquitectura RISC.
 
 ---
 

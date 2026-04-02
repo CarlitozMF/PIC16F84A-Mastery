@@ -1,0 +1,40 @@
+# =================================================================
+# GITIGNORE PARA PROYECTOS PIC16F84A (MPASM / MPLAB X)
+# =================================================================
+
+# --- Archivos de Salida del Compilador (Basura de Compilación) ---
+*.err
+*.lst
+*.obj
+*.cof
+*.map
+*.mcs
+*.p1
+*.pre
+*.sym
+*.o
+
+# --- Directorios de Construcción de MPLAB X ---
+build/
+dist/
+nbproject/private/
+nbproject/Makefile-*
+nbproject/Package-*
+
+# --- Archivos de Usuario y Temporales del IDE ---
+*.user
+*.bkx
+*.pjt
+*.mcp
+*.mcs
+disassembly.lst
+temp.txt
+
+# --- Binarios Finales (OPCIONAL) ---
+# Si queres que los .hex se suban para que otros los prueben, 
+# comenta la linea de abajo con un #
+# *.hex
+
+# --- Archivos de Sistema ---
+.DS_Store
+Thumbs.db

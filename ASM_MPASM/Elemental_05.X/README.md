@@ -10,6 +10,8 @@
 ## 📖 Teoría de Operación
 En este proyecto utilizamos la **Propiedad de Inversión** de la función lógica XOR ($A \oplus B = Y$). A diferencia de la OR o la AND, la XOR actúa como un "conmutador" dependiendo del valor de la máscara.
 
+---
+
 ### 📝 Fundamentos de la Máscara XOR
 Para invertir bits selectivamente, aplicamos la siguiente lógica booleana sobre el acumulador:
 

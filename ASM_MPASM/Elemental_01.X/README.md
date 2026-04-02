@@ -8,9 +8,30 @@
 ---
 
 ## 📖 Teoría de Operación
-Este proyecto marca la transición de la simple transferencia de datos al **procesamiento de información**. El sistema lee un valor binario variable desde el Puerto A (RA0-RA4), le suma una constante decimal fija (.74) y despliega el resultado en el Puerto B. 
+Este proyecto marca la transición de la simple transferencia de datos al **procesamiento de información**. El sistema implementa una operación aritmética de suma utilizando el acumulador como puente, lo que permite aplicar un factor de corrección o *offset* a una señal de entrada antes de su visualización.
 
-Este flujo es la base de los sistemas de instrumentación donde se requiere aplicar un *offset* o factor de corrección a una señal digital de entrada antes de su visualización.
+---
+
+### 📝 Fundamentos de la Instrucción ADDLW
+La instrucción `ADDLW k` (*Add Literal to W*) suma un valor constante (literal) directamente al contenido actual del acumulador **W**. El resultado de esta operación afecta directamente al registro `STATUS`, principalmente a los bits de **Z** (Zero) y **C** (Carry).
+
+#### **Lógica de Suma Aritmética**
+La operación sigue la ecuación básica procesada por la ALU:
+$$W_{final} = W_{inicial} + k$$
+
+#### **Cálculo de Offset (Desplazamiento)**
+Al aplicar una constante fija, el comportamiento del sistema es el siguiente:
+* **Estado Inicial:** `W = Valor_Entrada` (Capturado desde PORTA).
+* **Procesamiento:** `W = W + .74` (Suma del literal decimal).
+* **Estado Final:** `PORTB = W` (Resultado desplazado por la constante).
+
+**Ejemplo Práctico en el Proyecto:**
+Si ingresamos por el Puerto A el valor decimal **10**:
+1. **Captura:** `W = .10` (b'00001010').
+2. **Suma:** `ADDLW .74` (b'01001010').
+3. **Resultado:** `W = .84` (b'01010100'), valor que se despliega en los LEDs.
+
+> **Nota de Robustez:** Dado que el rango máximo de entrada es 31 (b'00011111') y la constante es 74, el resultado máximo será 105, lo cual garantiza que no ocurra un desborde (*Overflow*) del registro de 8 bits (máx 255).
 
 ---
 

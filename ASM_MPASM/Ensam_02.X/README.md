@@ -8,9 +8,31 @@
 ---
 
 ## 📖 Teoría de Operación
-En sistemas digitales, un **Nibble** representa la mitad de un byte (4 bits). Este ejercicio es fundamental para el desarrollo de drivers de periféricos que utilizan buses de datos de 4 bits, como los displays LCD 16x2 en modo comando o teclados matriciales.
+En la arquitectura de 8 bits del PIC16F84A, la unidad mínima de procesamiento es el **Byte**, pero para muchas aplicaciones de ingeniería es necesario manipular sus subdivisiones lógicas conocidas como **Nibbles** (grupos de 4 bits).
 
-El programa carga una constante binaria `b'11110000'` en el acumulador **W**, la cual apaga los 4 bits menos significativos (LSB) y enciende los 4 bits más significativos (MSB) del Puerto B.
+---
+
+### 📝 Fundamentos del Nibble (Medio Byte)
+Un Nibble representa la mitad de un registro. Esta división es fundamental para el desarrollo de drivers de periféricos que utilizan buses de datos reducidos, como los displays **LCD 16x2** en modo de 4 bits o la decodificación de **teclados matriciales**.
+
+#### **Estructura del Registro de 8 Bits**
+El registro se divide en dos secciones operativas:
+* **Nibble Alto (MSB):** Bits <7:4> (Most Significant Bits).
+* **Nibble Bajo (LSB):** Bits <3:0> (Least Significant Bits).
+
+
+
+#### **Lógica de Carga de Constantes**
+El ejercicio implementa una transferencia directa de una máscara binaria para controlar grupos de pines simultáneamente:
+1. **Carga (MOVLW):** Se carga la constante `b'11110000'` en el acumulador **W**.
+2. **Transferencia (MOVWF):** Se vuelca el contenido de **W** hacia el `PORTB`.
+
+**Efecto Físico en el Hardware:**
+Al aplicar esta constante, el puerto se divide lógicamente en dos estados:
+* **LEDs RB7-RB4:** Se encienden (Nivel alto '1').
+* **LEDs RB3-RB0:** Se apagan (Nivel bajo '0').
+
+> **Nota de Ingeniería:** Esta técnica de "Hardcoding" de constantes es el primer paso para entender cómo enviar comandos a periféricos externos, donde cada bit tiene una función específica (por ejemplo, RS, EN o R/W en un LCD).
 
 ---
 

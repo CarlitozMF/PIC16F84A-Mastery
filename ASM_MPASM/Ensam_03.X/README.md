@@ -8,9 +8,43 @@
 ---
 
 ## 📖 Teoría de Operación
-Este proyecto introduce el concepto de **interacción en tiempo real**. El microcontrolador actúa como un puente transparente: lee el estado de los interruptores conectados al Puerto A (RA0-RA4) y los despliega en el array de LEDs del Puerto B (RB0-RB4). 
+Este proyecto introduce el concepto de **interacción en tiempo real** mediante la creación de un puente lógico transparente entre los periféricos de entrada y salida. El microcontrolador actúa como un repetidor de estados, procesando la información de los interruptores para comandar el array de LEDs.
 
-Dado que el **PIC16F84A** posee resistencias de Pull-down en las entradas, se utiliza una lógica directa donde un nivel alto (5V) en la entrada activa la salida correspondiente.
+---
+
+### 📝 Configuración de Entradas: El Registro TRIS
+Para que un pin funcione como entrada, el microcontrolador debe configurar su etapa de salida en **Alta Impedancia (Hi-Z)**. Esto se logra mediante el registro **TRIS** (*Tri-State*), que actúa como el conmutador maestro de la dirección de datos en cada puerto.
+
+#### **Lógica del bit TRIS**
+El estado de cada bit en el registro `TRIS` determina el comportamiento físico y eléctrico del pin correspondiente:
+
+* **Bit = 1 (Input):** El pin se configura como una entrada de alta impedancia. El circuito de excitación interno se "desconecta" lógicamente, permitiendo que las tensiones externas (sensores, pulsadores) sean leídas sin interferencia del microcontrolador.
+* **Bit = 0 (Output):** El pin se configura como una salida activa (**Push-Pull**), permitiendo que el microcontrolador entregue corriente (VCC) o la absorba (GND) para controlar periféricos como LEDs, optoacopladores o transistores.
+
+> **💡 Regla Mnemotécnica:** Para recordar la configuración de forma rápida en ASM, asociamos el número con la inicial de su función en inglés:
+> * **1** $\rightarrow$ **I** (*Input*)
+> * **0** $\rightarrow$ **O** (*Output*)
+
+---
+
+### 📝 Fundamentos de la Transferencia Directa (Mirroring)
+En sistemas embebidos, el *Mirroring* es la técnica de replicar el estado de un registro de entrada (`PORTA`) en uno de salida (`PORTB`). Para que esta transferencia sea exitosa, ambos puertos deben estar sincronizados mediante el acumulador **W**, que sirve como vehículo de datos.
+
+#### **Lógica de Entrada y Pull-Down**
+Para garantizar estados lógicos definidos, el **PIC16F84A** requiere una referencia de tensión clara:
+* **Estado de Reposo (0):** Las resistencias de **Pull-down** externas aseguran que el pin esté a 0V cuando el interruptor está abierto.
+* **Estado Activo (1):** Al cerrar el interruptor, se inyectan 5V (VCC) al pin, superando el umbral de conmutación lógica.
+
+#### **Flujo de Datos en el Programa**
+El microcontrolador ejecuta un ciclo infinito de tres pasos críticos:
+1. **Lectura:** Se captura el estado físico de los pines RA0-RA4 y se guarda en el acumulador.
+2. **Puente:** El acumulador mantiene el dato de forma volátil.
+3. **Escritura:** Se vuelca el contenido del acumulador hacia los pines RB0-RB4.
+
+**Efecto Físico en el Hardware:**
+Existe una relación biunívoca (1 a 1) entre la entrada y la salida. Si el interruptor en RA2 se cierra, el LED en RB2 se enciende instantáneamente, demostrando el determinismo del código ASM.
+
+> **Nota Técnica:** Aunque parece una tarea simple, este proyecto valida la correcta configuración de los registros `TRIS` y la integridad eléctrica de las conexiones en la placa de desarrollo (EDUCIAA o similar).
 
 ---
 

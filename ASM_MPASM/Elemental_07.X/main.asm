@@ -1,7 +1,7 @@
 ;*************************************************************************************************
 ; PROYECTO: Elemental_07 - Bit Shifting
 ; AUTOR: Carlos Mamani Flores (UTN-FRT)
-; DESCRIPCIÓN: Lee RA<4:0>, se desplaza un bit a la izquierda, por la derecha entrará un ?1?
+; DESCRIPCIÓN: Lee RA<4:0>, se desplaza un bit a la izquierda, por la derecha entrará un '1'
 ;y se muestra el resultado en RB<7:0> 
 ;*************************************************************************************************
 
