@@ -16,6 +16,30 @@ Al realizar un `AND` entre la entrada y la `MASCARA_AND` (b'01010101'):
 
 ---
 
+### 📝 Fundamentos de la Máscara AND
+Para anular o "limpiar" bits selectivamente, aplicamos la siguiente lógica booleana sobre el acumulador:
+
+#### **Tabla de Verdad AND**
+| Entrada A | Entrada B | Resultado (A · B) |
+| :---: | :---: | :---: |
+| 0 | 0 | **0** (Apaga) |
+| 0 | 1 | **0** (Mantiene 0) |
+| 1 | 0 | **0** (Apaga) |
+| 1 | 1 | **1** (Mantiene 1) |
+
+
+#### **Lógica de Anulación Selectiva**
+Al aplicar una máscara con la instrucción `ANDLW`, el comportamiento sobre cada bit del estado previo es:
+* **`estado_previo & 1` = `estado_previo`**: El bit conserva su valor original (1 es el neutro).
+* **`estado_previo & 0` = `0`**: El bit se fuerza a nivel bajo (0 es el absorbente).
+
+**Ejemplo Práctico (Anular bits impares):**
+Si el `PORTA` tiene un estado desconocido representado por `x`:
+`xxxx xxxx` & `0101 0101` = `0x0x 0x0x`
+
+> **Nota Técnica:** Como se observa en el resultado, los bits en las posiciones donde la máscara tiene un '0' se apagan obligatoriamente (bits impares), mientras que las posiciones con '1' mantienen su estado original `x`.
+---
+
 ## 🏗️ Arquitectura del Software (Modelo de 3 Capas)
 
 El desarrollo se organiza bajo una estructura jerárquica para asegurar la escalabilidad:

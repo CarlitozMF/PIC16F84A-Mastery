@@ -8,9 +8,35 @@
 ---
 
 ## 📖 Teoría de Operación
-En el desarrollo de sistemas embebidos, la manipulación de bits individuales es una técnica crítica. Este proyecto lee un valor binario desde el Puerto A y le aplica dos procesos lógicos consecutivos:
+En el desarrollo de sistemas embebidos, la manipulación de bits individuales es una técnica crítica. Este proyecto procesa la entrada mediante dos etapas lógicas consecutivas:
+
 1. **Máscara AND (Filtro):** Asegura que solo los 5 bits físicos del Puerto A lleguen al acumulador, eliminando cualquier "ruido" en los bits 5, 6 y 7.
-2. **Máscara OR (Inyección):** Fuerza los bits pares (0, 2, 4, 6) a encenderse, independientemente de lo que se haya leído en la entrada.
+2. **Máscara OR (Inyección):** Utiliza la propiedad del **Elemento Neutro** de la función lógica OR ($A + 0 = A$) para forzar el encendido de bits específicos sin alterar el resto del registro.
+
+---
+
+### 📝 Fundamentos de la Máscara OR
+Para encender bits selectivamente, aplicamos la siguiente lógica booleana sobre el acumulador:
+
+#### **Tabla de Verdad OR**
+| Entrada A | Entrada B | Resultado (A + B) |
+| :---: | :---: | :---: |
+| 0 | 0 | **0** (Mantiene 0) |
+| 0 | 1 | **1** (Enciende) |
+| 1 | 0 | **1** (Mantiene 1) |
+| 1 | 1 | **1** (Enciende) |
+
+
+#### **Lógica de Encendido Selectivo**
+Al aplicar una máscara con la instrucción `IORLW`, el comportamiento sobre cada bit del estado previo es:
+* **`estado_previo | 0` = `estado_previo`**: El bit conserva su valor original (0 es el neutro).
+* **`estado_previo | 1` = `1`**: El bit se fuerza a nivel alto (1 es el dominante).
+
+**Ejemplo Práctico (Fijar bits pares):**
+Si el `PORTA` tiene un estado desconocido representado por `x`:
+`xxxx xxxx` | `0101 0101` = `x1x1 x1x1`
+
+> **Nota Técnica:** Como se observa en el resultado, los bits en las posiciones donde la máscara tiene un '1' se encienden obligatoriamente, mientras que las posiciones con '0' mantienen su estado original `x`.
 
 ---
 
