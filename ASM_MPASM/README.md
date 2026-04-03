@@ -49,10 +49,8 @@ Cada laboratorio se organiza de forma modular para facilitar la lectura del cód
 
 ### 🟨 Fase 3: Control de Flujo y Subrutinas (Cap. 9 y 10)
 *Objetivo: Abstracción de funciones y gestión de tiempos.*
-- [ ] **Lab 04:** Implementación de retardos por software (Bucles anidados).
-- [ ] **Lab 05:** Manejo de tablas de datos con `RETLW` (Binario a 7-Seg).
-- [ ] **Lab 06:** Control de un Display LED mediante multiplexación.
-> **Instrucciones clave:** `CALL`, `RETURN`, `DECFSZ`, `PCLATH`.
+- [x] **[Lab 14 (Saltos_01)](./Saltos_01.X/):** Control de flujo mediante saltos condicionales y lógica de bifurcación (BTFSS-BTFCS/GOTO).
+> **Instrucciones clave:** `BTFSS`,`BTFCS`,`CALL`, `RETURN`, `DECFSZ`, `PCLATH`.
 
 ### 🟧 Fase 4: Periféricos y Eventos de Hardware (Cap. 11 a 13)
 *Objetivo: Uso de módulos internos y gestión de interrupciones.*

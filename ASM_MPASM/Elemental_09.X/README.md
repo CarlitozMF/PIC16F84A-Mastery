@@ -17,8 +17,6 @@ La operación `XORLW` procesa bit a bit el acumulador contra una constante liter
 1. **Paso Directo (Neutro):** Si el bit de la máscara es **0**, el resultado es igual al bit de entrada ($x \oplus 0 = x$).
 2. **Inversión (Toggle):** Si el bit de la máscara es **1**, el resultado es el inverso del bit de entrada ($x \oplus 1 = \bar{x}$).
 
-
-
 #### **Aplicación en el Proyecto**
 Utilizamos la máscara `b'01010101'`. Esto produce el siguiente efecto:
 * **Bits 0, 2, 4, 6:** Tienen un '1' en la máscara $\rightarrow$ Se **invierten**.
