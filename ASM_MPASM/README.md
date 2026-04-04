@@ -54,6 +54,7 @@ Cada laboratorio se organiza de forma modular para facilitar la lectura del cód
 - [x] **[Lab 16 (Saltos_03)](./Saltos_03.X/):** Implementación de comparadores de magnitud (≥ y <) mediante la gestión de la bandera Carry (Borrow).
 - [x] **[Lab 17 (Saltos_04)](./Saltos_04.X/):** Implementación de comparador Mayor Estricto (>) mediante lógica de cascada y evaluación jerárquica de banderas (Z y C).
 - [x] **[Lab 18 (Saltos_05)](./Saltos_05.X/):** Clasificador de triple estado (=,>,<) mediante lógica jerárquica de banderas (Z y C) y bifurcación por descarte sucesivo.
+- [x] **[Lab 19 (Saltos_06)](./Saltos_06.X/):** Conversor de magnitud a barra de progreso mediante algoritmos iterativos y manipulación dinámica de bits con la instrucción **RLF**.
 > **Instrucciones clave:** `BTFSS`,`BTFCS`,`CALL`, `RETURN`, `DECFSZ`, `PCLATH`.
 
 ### 🟧 Fase 4: Periféricos y Eventos de Hardware (Cap. 11 a 13)
