@@ -53,6 +53,7 @@ Cada laboratorio se organiza de forma modular para facilitar la lectura del cód
 - [x] **[Lab 15 (Saltos_02)](./Saltos_02.X/):** Procesamiento de magnitudes y comparación de registros mediante operaciones en la ALU.
 - [x] **[Lab 16 (Saltos_03)](./Saltos_03.X/):** Implementación de comparadores de magnitud (≥ y <) mediante la gestión de la bandera Carry (Borrow).
 - [x] **[Lab 17 (Saltos_04)](./Saltos_04.X/):** Implementación de comparador Mayor Estricto (>) mediante lógica de cascada y evaluación jerárquica de banderas (Z y C).
+- [x] **[Lab 18 (Saltos_05)](./Saltos_05.X/):** Clasificador de triple estado (=,>,<) mediante lógica jerárquica de banderas (Z y C) y bifurcación por descarte sucesivo.
 > **Instrucciones clave:** `BTFSS`,`BTFCS`,`CALL`, `RETURN`, `DECFSZ`, `PCLATH`.
 
 ### 🟧 Fase 4: Periféricos y Eventos de Hardware (Cap. 11 a 13)
