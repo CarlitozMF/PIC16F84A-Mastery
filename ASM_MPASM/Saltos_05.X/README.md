@@ -85,21 +85,30 @@ MODO_IF                     ; Si llega aquí -> Es MAYOR
     MOVWF   PORTB
     goto    MAIN
 ```
-🛠️ Detalles de Robustez
 
-    Determinismo en la Clasificación: Mediante el filtrado jerárquico, se garantiza una respuesta rápida y unívoca, evitando estados de ambigüedad en los umbrales de transición.
+---
 
-    Optimización de Latencia: El diseño de la cascada permite que el microcontrolador tome la decisión en un intervalo de 2 a 6 ciclos de instrucción, manteniendo una respuesta estable en tiempo real.
+### 🛠️ Detalles de Robustez
 
-    Persistencia de Datos: El uso de VALOR_LEIDO protege la integridad de la muestra original frente a la naturaleza destructiva de las operaciones en el acumulador W.
+* **Determinismo en la Clasificación:** Mediante la implementación de un **filtrado jerárquico de banderas**, se garantiza una respuesta rápida, unívoca y libre de ambigüedades en los umbrales de transición ($=, >, <$).
+* **Optimización de Latencia y Tiempo Real:** El diseño de la cascada de saltos permite que el microcontrolador tome la decisión lógica en un intervalo de **2 a 6 ciclos de instrucción**. Esto asegura una latencia estable, fundamental para sistemas de control de lazo cerrado.
+* **Persistencia de Datos (Non-Destructive Read):** El uso del registro `VALOR_LEIDO` protege la integridad de la muestra original. Esto evita que la naturaleza destructiva de la operación `SUBWF` en el acumulador W afecte la disponibilidad del dato para procesos posteriores.
 
-🗺️ Mapeo de Hardware
-Componente	Pin PIC16F84A	Configuración	Función
-DIP-Switch	RA<4:0>	Entrada	Entrada de dato binario (0-31)
-Barra LEDs	RB<7:0>	Salida	Indicador visual de estado (=, >, <)
-Reloj	Cristal XT	4 MHz	Sincronía de la ALU
-🎓 Conclusión
+---
 
-Este laboratorio representa el dominio avanzado de los saltos condicionales y comparadores. La capacidad de clasificar una señal en tres estados es la base fundamental para el diseño de controladores de lazo cerrado (On/Off con zona muerta), sistemas de alarmas por umbral y lógica de navegación en robótica móvil.
+### 🗺️ Mapeo de Hardware
 
-🛠️ Estudiante de Ing. Electrónica @UTN_FRT | Apasionado por los Sistemas Embebidos y el Low-level (ASM/C).
+| Componente | Pin PIC16F84A | Configuración | Función |
+| :--- | :--- | :--- | :--- |
+| **DIP-Switch** | RA<4:0> | Entrada | Ingreso de dato binario (Rango 0-31) |
+| **Barra LEDs** | RB<7:0> | Salida | Indicador visual de estado lógico ($=, >, <$) |
+| **Reloj** | Cristal XT | 4 MHz | Sincronía de la ALU y base de tiempo |
+
+---
+
+### 🎓 Conclusión
+
+Este laboratorio representa el dominio avanzado de los **saltos condicionales y comparadores aritméticos**. La capacidad de clasificar una señal en tres estados diferenciados es la base fundamental para el diseño de controladores de lazo cerrado (como sistemas On/Off con zona muerta), algoritmos de seguridad por umbrales y la lógica de toma de decisiones en robótica móvil y navegación.
+
+---
+🛠️ *Estudiante de Ing. Electrónica @UTN_FRT | Apasasionado por los Sistemas Embebidos y el Low-level (ASM/C).*
