@@ -1,0 +1,68 @@
+;*************************************************************************************************
+; PROYECTO: Saltos_02 - Introduccion a las comparaciones
+; AUTOR: Carlos Mamani Flores (UTN-FRT)
+; DESCRIPCIÓN: Lee RA<4:0>, se compara con un numero y se muestra el resultado en RB<7:0>.
+;Si PORTA = Numero se encienden los leds LED_ON_1 (todos encendidos)
+;Si PORTA != Numero se encienden los leds LED_ON_2 (pares encendidos impares apagados)
+;*************************************************************************************************
+
+	LIST	P=16F84A
+	INCLUDE	<P16F84A.INC>
+	
+	__CONFIG _FOSC_XT & _WDTE_OFF & _PWRTE_OFF & _CP_OFF
+
+;--- CAPA 1: MAPEO DE HARDWARE Y CONSTANTES ---
+
+;Reservo un bloque de memoria RAM	
+	    CBLOCK  0x0C		;Me posiciono en la direccion 0x0C de la RAM
+	    VALOR_LEIDO			;Registro auxiliar donde voy a almacenar el valor de PORTA
+	    AUXILIAR			;Registro Auxiliar donde voy a guardar el valor de la constante
+	    ENDC
+
+NUMERO	    EQU	 .16			;numero a comparar entre 0 y 32
+ENTRADAS    EQU	 b'00011111'		;Mascara para habilitar PORTA como entrada
+MASCARASW   EQU  b'00011111'		;Mascara de filtrado
+LED_ON_1    EQU	 b'11111111'		;Mascara para encender todos los leds
+LED_ON_2    EQU	 b'01010101'		;Mascara para encender solo los pares
+	
+	ORG	0x00
+	goto	CONFIG_PERIF
+	
+	ORG	0x04
+	RETFIE
+
+;--- CAPA 2: CONFIGURACION DE PERIFERICOS
+CONFIG_PERIF
+	BSF	STATUS,RP0	;cargo 1 en RP0 para acceder al banco 1
+	MOVLW	ENTRADAS	;Cargo la constante que define los pines de entrada en W
+	MOVWF	TRISA		;Configuro los pines que van a ser entradas en PORTA
+	CLRF	TRISB	    	;Configuro en 0 todos los pines de TRISB para salidas
+	BCF	STATUS,RP0	;Cargo 0 en RP0 para retornar al banco 0
+	
+	CLRF	PORTB		;Aseguro salidas en 0 para iniciar
+
+;--- CAPA 3: LOGICA DE APLICACION
+MAIN
+	MOVF	PORTA,W		;Leo los valores de entrada
+	ANDLW	MASCARASW	;Filtro las entradas RA<4:0>
+	MOVWF	VALOR_LEIDO	;Guardo estos valores en un registro auxiliar
+	
+;Comienza la comparacion	
+	MOVLW	NUMERO		;Cargo en W el numero a comparar
+	SUBWF	VALOR_LEIDO,W	;Ejecuto (W)=(VALOR_LEIDO)- (W)
+	
+;Aqui compara Si VALOR_LEIDO == 16, entonces W = 0 y el bit Z = 1
+	BTFSS	STATUS,Z	;Si Z=1 salto a modo_if sino ejecuto el goto
+	goto	MODO_ELSE		
+	
+MODO_IF				;Se ejecuta si (W)=(VALOR_LEIDO)
+	MOVLW	LED_ON_1
+	MOVWF	PORTB
+	goto	MAIN
+MODO_ELSE			;Se ejecuta si (W)!=(VALOR_LEIDO)
+	MOVLW	LED_ON_2
+	MOVWF	PORTB
+	goto	MAIN
+	
+	END
+

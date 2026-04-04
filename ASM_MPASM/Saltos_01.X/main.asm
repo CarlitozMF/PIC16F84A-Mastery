@@ -1,5 +1,5 @@
 ;*************************************************************************************************
-; PROYECTO: Saltos_01 - Modo Standby
+; PROYECTO: Saltos_01 - Introduccion a los Saltos Condicionales
 ; AUTOR: Carlos Mamani Flores (UTN-FRT)
 ; DESCRIPCIÓN: Lee RA0 y se muestra el resultado en RB<7:0>.
 ;Si RA0 = 1 se encienden los leds LED_ON_1
